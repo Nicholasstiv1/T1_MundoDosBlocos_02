@@ -1,13 +1,11 @@
 % Definindo blocos e seus tamanhos
 bloco(a, 1, 1).
 bloco(b, 1, 1).
-bloco(c, 1, 2).
+bloco(c, 1, 1).
 
-% Definindo a configuração inicial na mesa
 configuracao_inicial([a, b, c]).
 
-% Definindo as posições na mesa (coordenadas X e Y)
-:- dynamic posicao/4. % Agora 4 argumentos: bloco, X, Y, TamanhoY
+:- dynamic posicao/4. % bloco, X, Y, TamanhoY
 
 posicao(a, 1, 1, 1).
 posicao(b, 1, 2, 1). 
@@ -36,7 +34,7 @@ mover(Bloco, X, Y) :-
     assert(posicao(Bloco, X, Y, TamanhoY)),
     empilhar_blocos_acima(Bloco, X, Y).
 
-% Regra para empilhar os blocos acima do bloco movido, se houver
+% Regra para empilhar os blocos acima do bloco movido
 empilhar_blocos_acima(Bloco, X, Y) :-
     findall(BlocoSuperior, (posicao(BlocoSuperior, XSuperior, YSuperior, _), YSuperior =:= Y + 1), BlocosAcima),
     empilhar_blocos(BlocosAcima, X, Y).
