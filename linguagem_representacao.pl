@@ -34,6 +34,11 @@ mover(Bloco, X, Y) :-
     assert(posicao(Bloco, X, Y, TamanhoY)),
     empilhar_blocos_acima(Bloco, X, Y).
 
+% Regra para verificar a posição atual de um bloco
+verificar_posicao(Bloco, Posicao) :-
+    posicao(Bloco, X, Y, TamanhoY),
+    Posicao = (X, Y, TamanhoY).
+
 % Regra para empilhar os blocos acima do bloco movido
 empilhar_blocos_acima(Bloco, X, Y) :-
     findall(BlocoSuperior, (posicao(BlocoSuperior, XSuperior, YSuperior, _), YSuperior =:= Y + 1), BlocosAcima),
